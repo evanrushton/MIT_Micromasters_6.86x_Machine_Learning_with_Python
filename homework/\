@@ -1,0 +1,18 @@
+import numpy as np
+
+theta = {'p_1':0.5, 'p_2':0.5, 'mu_1':6, 'mu_2':7, 's2_1':1, 's2_2':4}
+D = np.array([-1, 0, 4, 5 ,6])
+probs= np.zeros(len(D))
+
+# Calulcate the probability density for data points x in a normal distribution N(mean, var)
+def normal_dist(x, mean, var):
+  prob_density = 1/np.sqrt(2*np.pi*var) * np.exp(-np.divide((np.subtract(x,mean))**2,2*var))
+  return prob_density
+
+# Return the posterior probabilities for a data points x with a given set of params theta
+def E_step(x, theta):
+  num = theta['p_1']*normal_dist(x, theta['mu_1'], theta['s2_1'])
+  denom = theta['p_1']*normal_dist(x, theta['mu_1'], theta['s2_1']) + theta['p_2']*normal_dist(x, theta['mu_2'], theta['s2_2'])
+  return num/denom
+
+print(E_step(D, theta))

@@ -1,0 +1,34 @@
+import numpy as np
+import kmeans
+import common
+import naive_em
+import em
+
+X = np.loadtxt("toy_data.txt")
+
+
+### Run k-means
+# K = [1,2,3,4]
+# seeds = [0,1,2,3,4]
+# mixtures, posts, costs = [], [], []
+# for k in K:
+#   mixtures.append([]) 
+#   posts.append([]) 
+#   costs.append([]) 
+#   for seed in seeds:
+#     mix, post = common.init(X, k, seed) # random initialization
+#     mix, post, cost = kmeans.run(X, mix, post) # run kmeans 
+#     mixtures[k-1].append(mix)
+#     posts[k-1].append(post)
+#     costs[k-1].append(cost)
+# 
+# for k in K: 
+#   seed = np.argmin(costs[k-1])
+#   common.plot(X, mixtures[k-1][seed], posts[k-1][seed],f'K={k}, seed={seed}')
+
+### Run Naive EM
+k=3
+seed=0
+mix, post = common.init(X, k, seed) # random initialization
+mix, post, cost = naive_em.run(X, mix, post)
+#print(mix, post)
